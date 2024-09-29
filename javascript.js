@@ -20,12 +20,14 @@ let computerScore = 0;
 }
 
 function getHumanChoice() {
-    const choice = prompt("rock, paper or scissors? ").toLowerCase();
-///currently undefined
+    const humanChoice = prompt("rock, paper or scissors? ").toLowerCase();
+    return humanChoice;
 }
 
 function playRound(humanChoice, computerChoice) {
-    if (humanChoice === "rock" && computerChoice === 'scissors') {
+    if (humanChoice === computerChoice){
+        return "It\'s a tie!";
+    } else if (humanChoice === "rock" && computerChoice === 'scissors') {
         return 'player wins!';
     } else if (humanChoice === "scissors" && computerChoice === 'rock') {
         return 'computer wins!';
@@ -41,9 +43,38 @@ function playRound(humanChoice, computerChoice) {
         return 'computer wins!';
     }
     
+    
 }
+
+function game() {
+    let computerScore = 0;
+    let humanScore = 0;
+    //round incrument
+    for (let i = 1; i <= 5; i++){
+        console.log('round ' + i)// current round number
+        let humanChoice = getHumanChoice(); // calls human prompt
+        let computerChoice = getComputerChoice(); // calls computer choice
+        console.log("computer chose " + `${computerChoice}`); //computer choice revealed
+        
+        const result = playRound(humanChoice, computerChoice); // determine the outcome of each choice
+        console.log(result); // result
+
+        //score update
+        if (result === "player wins!") {
+            humanScore++; // human score plus 1 
+
+        } else if (result === "computer wins!"){
+            computerScore++; // computer score plus 1
+        }
+    }
+
+    console.log(`Final score; Player ${humanScore} - Computer ${computerScore}`);
+
+}
+
+ 
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
-console.log();
+game()
